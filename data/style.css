@@ -1,0 +1,147 @@
+body {
+    font-family: sans-serif;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    margin: 0;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1, h2, h3 {
+    color: #569cd6;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.data-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1em;
+    background-color: #252526;
+    padding: 1em;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.data-section {
+    background-color: #1e1e1e;
+    padding: 0.8em;
+    border-radius: 5px;
+}
+
+.data-section h2 {
+    color: #4ec9b0;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 1.1em;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.3em;
+}
+
+.data-section p {
+    margin: 0.3em 0;
+    font-size: 0.95em;
+}
+
+.data-section span {
+    font-weight: bold;
+    color: #ce9178;
+    min-width: 40px; /* Ensure some space for the numbers */
+    display: inline-block;
+}
+
+/* Estilos para offsets */
+.offsets-container {
+    background-color: #252526;
+    padding: 1em;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    margin-top: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.offsets-container h3 {
+    margin-top: 0;
+    color: #569cd6;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.offsets-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    font-size: 0.85em;
+}
+
+.offsets-data p {
+    margin: 0.2em 0;
+}
+
+.offsets-data span {
+    font-family: monospace;
+    color: #b5cea8;
+}
+
+/* Estilos para información del sistema */
+.system-info {
+    background-color: #252526;
+    padding: 1em;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.system-info h3 {
+    margin-top: 0;
+    color: #569cd6;
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.system-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+
+.system-item p {
+    margin: 0.2em 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.progress-container {
+    height: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4ec9b0;
+    transition: width 0.5s ease-in-out;
+}
+
+.chip-info {
+    margin-top: 1em;
+    text-align: center;
+    font-size: 0.85em;
+    color: #9cdcfe;
+}
+
+.chip-info span {
+    color: #ce9178;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos MPU6050</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Datos del Sensor MPU6050</h1>
+    <div class="data-container">
+        <div class="data-section">
+            <h2>Ángulos (°)</h2>
+            <p>X: <span id="angleX">--</span></p>
+            <p>Y: <span id="angleY">--</span></p>
+            <p>Z: <span id="angleZ">--</span></p>
+        </div>
+        <div class="data-section">
+            <h2>Aceleración (g)</h2>
+            <p>X: <span id="ax">--</span></p>
+            <p>Y: <span id="ay">--</span></p>
+            <p>Z: <span id="az">--</span></p>
+        </div>
+        <div class="data-section">
+            <h2>Giroscopio (°/s)</h2>
+            <p>X: <span id="gx">--</span></p>
+            <p>Y: <span id="gy">--</span></p>
+            <p>Z: <span id="gz">--</span></p>
+        </div>
+        <div class="data-section">
+            <h2>Temperatura (°C)</h2>
+            <p><span id="temperature">--</span></p>
+        </div>
+    </div>
+
+    <!-- Nueva sección para los sensores de proximidad -->
+    <h1>Sensores de Proximidad</h1>
+    <div class="proximity-container">
+        <div class="data-section">
+            <h2>Distancias (mm)</h2>
+            <p>Frontal: <span id="frontDistance">--</span></p>
+            <p>Izquierda: <span id="leftDistance">--</span></p>
+            <p>Derecha: <span id="rightDistance">--</span></p>
+        </div>
+    </div>
+
+    <div class="offsets-container">
+        <h3>Valores de Offset</h3>
+        <div class="offsets-data">
+            <div>
+                <p>Gyro X: <span id="offsetGyroX">--</span></p>
+                <p>Gyro Y: <span id="offsetGyroY">--</span></p>
+                <p>Gyro Z: <span id="offsetGyroZ">--</span></p>
+            </div>
+            <div>
+                <p>Accel X: <span id="offsetAccelX">--</span></p>
+                <p>Accel Y: <span id="offsetAccelY">--</span></p>
+                <p>Accel Z: <span id="offsetAccelZ">--</span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="system-info">
+        <h3>Información del Sistema</h3>
+        <div class="system-grid">
+            <div class="system-item">
+                <p>RAM:</p>
+                <div class="progress-container">
+                    <div id="ramProgress" class="progress-bar"></div>
+                </div>
+                <p><span id="usedHeap">--</span> / <span id="totalHeap">--</span> KB</p>
+            </div>
+            <div class="system-item">
+                <p>Flash:</p>
+                <div class="progress-container">
+                    <div id="flashProgress" class="progress-bar"></div>
+                </div>
+                <p><span id="usedFlash">--</span> / <span id="totalFlash">--</span> KB</p>
+            </div>
+        </div>
+        <div class="chip-info">
+            <p>Modelo: <span id="chipModel">--</span> | 
+               Núcleos: <span id="chipCores">--</span> | 
+               CPU: <span id="cpuFreq">--</span> MHz</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
