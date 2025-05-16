@@ -76,16 +76,45 @@ function fetchProximityData() {
     });
 }
 
+// Nueva función para obtener el estado de detección de línea
+function fetchLineDetection() {
+  fetch("/getLineDetection")
+    .then((response) => response.json())
+    .then((data) => {
+      const lineDetectedElement = document.getElementById("lineDetected");
+      const lineDetectorSection = document.getElementById("lineDetectorSection");
+
+      // Actualizar texto
+      lineDetectedElement.textContent = data.lineDetected ? "SÍ" : "NO";
+
+      // Actualizar estilo visual según detección
+      if (data.lineDetected) {
+        lineDetectorSection.classList.remove("no-line-detected");
+        lineDetectorSection.classList.add("line-detected");
+      } else {
+        lineDetectorSection.classList.remove("line-detected");
+        lineDetectorSection.classList.add("no-line-detected");
+      }
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos de detección de línea:", error);
+    });
+}
+
 // Llama a fetchMPUData cada 500 ms (0.5 segundos)
 setInterval(fetchMPUData, 500);
 
 // Llama a fetchSystemInfo cada 3000 ms (3 segundos)
 setInterval(fetchSystemInfo, 3000);
 
-// Llama a fetchProximityData cada 200 ms para lecturas más frecuentes
+// Llama a fetchProximityData cada 500 ms para lecturas frecuentes
 setInterval(fetchProximityData, 500);
+
+// Llama a fetchLineDetection cada 200 ms para obtener lecturas más rápidas del detector de línea
+setInterval(fetchLineDetection, 200);
 
 // Llama a todas las funciones inmediatamente al cargar la página
 fetchMPUData();
 fetchSystemInfo();
 fetchProximityData();
+fetchLineDetection();

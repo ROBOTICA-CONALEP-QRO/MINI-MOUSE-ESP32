@@ -145,3 +145,50 @@ h1, h2, h3 {
 .chip-info span {
     color: #ce9178;
 }
+
+/* Estilos para el detector de línea */
+.line-detector-container {
+    display: flex;
+    justify-content: center;
+    background-color: #252526;
+    padding: 1em;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin-top: 1em;
+}
+
+/* Estilos para cuando se detecta una línea */
+.line-detected {
+    background-color: #9d4a4a !important; /* Fondo rojo oscuro cuando se detecta línea */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.line-detected span {
+    color: #ff9191 !important; /* Color rojo claro para el texto cuando se detecta línea */
+    font-weight: bold;
+}
+
+/* Estilos para cuando no se detecta línea */
+.no-line-detected {
+    background-color: #3c6e3c !important; /* Fondo verde oscuro cuando no hay línea */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.no-line-detected span {
+    color: #9fecb8 !important; /* Color verde claro para el texto cuando no hay línea */
+}
+
+/* Estilos para proximidad son iguales para mantener consistencia */
+.proximity-container {
+    display: flex;
+    justify-content: center;
+    background-color: #252526;
+    padding: 1em;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin-top: 1em;
+}
