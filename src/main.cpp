@@ -6,6 +6,7 @@
 #include <freertos/task.h>
 #include <freertos/semphr.h>
 #include <Arduino.h>
+#include "lineDetector.h"
 
 // Declarar externamente los handles de los semáforos definidos en giroscopio.cpp
 extern SemaphoreHandle_t xSemaphoreGiroscopio;
@@ -60,6 +61,8 @@ void setup()
         Serial.println("Error crítico: No se pudo crear la tarea de sensores de proximidad");
         while(1);
     }
+    // detector de linea
+    initializeLineDetector();
     
     // Crear la tarea para configurar el servidor web
     BaseType_t webTaskCreated = xTaskCreate(
