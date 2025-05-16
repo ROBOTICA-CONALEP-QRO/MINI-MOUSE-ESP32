@@ -7,6 +7,7 @@
 #include "proximitySensors.h"
 #include <LittleFS.h>
 #include <ESPmDNS.h>
+#include "lineDetector.h"
 
 const char *ssid = "Totalplay-F4A3";
 const char *password = "F4A3D4DB82qNSUMy";
@@ -56,6 +57,7 @@ void setupWebServer(void *parameter)
     server.on("/getMPUdata", HTTP_GET, handleGetGiroscopioData);
     server.on("/getSystemInfo", HTTP_GET, handleGetSystemInfo);
     server.on("/getProximityData", HTTP_GET, handleGetProximityData);
+    server.on("/getLineDetection", HTTP_GET, handleGetLineDetection);  // Nuevo endpoint para detección de línea
     
     // Después configuramos el servidor de archivos estáticos
     // El archivo por defecto para la ruta "/" será "index.html"
@@ -135,6 +137,18 @@ void handleGetProximityData(AsyncWebServerRequest *request)
     jsonResponse += "\"front\": " + String(proximityData.frontDistance) + ",";
     jsonResponse += "\"left\": " + String(proximityData.leftDistance) + ",";
     jsonResponse += "\"right\": " + String(proximityData.rightDistance) + "";
+    jsonResponse += "}";
+    
+    request->send(200, "application/json", jsonResponse);
+}
+
+// Nueva función para manejar la detección de línea
+void handleGetLineDetection(AsyncWebServerRequest *request)
+{
+    bool lineDetected = ifLineDetected();
+    
+    String jsonResponse = "{";
+    jsonResponse += "\"lineDetected\": " + String(lineDetected ? "true" : "false");
     jsonResponse += "}";
     
     request->send(200, "application/json", jsonResponse);
