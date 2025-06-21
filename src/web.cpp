@@ -9,14 +9,16 @@
 #include <ESPmDNS.h>
 #include "lineDetector.h"
 
-const char *ssid = "Totalplay-F4A3";
-const char *password = "F4A3D4DB82qNSUMy";
+//const char *ssid = "Totalplay-F4A3";
+//const char *password = "F4A3D4DB82qNSUMy";
+const char *ssid = "esp32s";
+const char *password = "12345678";
 
 static AsyncWebServer server(80);
 
 void setupWebServer(void *parameter)
 {
-    if (!LittleFS.begin(true))
+    if (!LittleFS.begin(true, "/storage", 1, "storage"))
     {
         Serial.println("Error al montar el sistema de archivos LittleFS");
         vTaskDelete(NULL);
@@ -37,16 +39,34 @@ void setupWebServer(void *parameter)
     root.close();
     Serial.println("--- Fin: Listado LittleFS ---");
 
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED)
+    //WiFi.mode(WIFI_STA);
+    //WiFi.begin(ssid, password);
+    /*while (WiFi.status() != WL_CONNECTED)
     {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         Serial.println("Conectando a WiFi...");
+    }*/
+   //Crear red wifi
+    WiFi.mode(WIFI_AP_STA);
+    if(WiFi.softAP(ssid, password)) {
+        Serial.println("------------------------------------------");
+        Serial.println("Red WiFi creada exitosamente");
+        Serial.println("Nombre de la red: " + String(ssid));
+        Serial.println("Contraseña: " + String(password));
+        Serial.println("------------------------------------------");
+        Serial.println("Para conectarte:");
+        Serial.println("1. Conecta tu dispositivo a la red '" + String(ssid) + "'");
+        Serial.println("2. Abre un navegador web");
+        Serial.println("3. Navega a http://192.168.4.1 o http://esp32s.local");
+        Serial.println("------------------------------------------");
+    } else {
+        Serial.println("Error al crear el punto de acceso WiFi");
     }
+    
+    IPAddress myIP = WiFi.softAPIP();
+    Serial.print("Dirección IP del punto de acceso: ");
+    Serial.println(myIP);
 
-    Serial.println("Conectado a WiFi");
-    Serial.println("Dirección IP: " + WiFi.localIP().toString());
     // mDNS
     if (!MDNS.begin("esp32s"))
     {
@@ -105,9 +125,6 @@ void handleGetSystemInfo(AsyncWebServerRequest *request)
     uint32_t totalFlash = ESP.getFlashChipSize() / 1024;  // Flash total en KB
     uint32_t usedFlash = ESP.getSketchSize() / 1024;      // Flash usado por sketch en KB
     uint32_t freeFlash = totalFlash - usedFlash;          // Flash libre (aproximado) en KB
-    //debug
-    Serial.printf("Memoria libre: ");
-    Serial.println(ESP.getFreeSketchSpace() / 1024);
     
     String chipModel = ESP.getChipModel();
     uint32_t chipCores = ESP.getChipCores();

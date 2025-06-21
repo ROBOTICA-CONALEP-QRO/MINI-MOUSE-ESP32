@@ -1,0 +1,5 @@
+# Espacio para la partición de código 4MB total
+# Name, Type, Subtype, Offset, Size, Flags
+nvs, data, nvs, 0x9000, 0x6000,
+factory, app, factory, 0x10000, 0x1E8480,
+storage, data, spiffs, 0x1F9000, 0x16E000,

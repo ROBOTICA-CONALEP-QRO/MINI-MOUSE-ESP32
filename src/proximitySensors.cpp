@@ -16,7 +16,7 @@ static SemaphoreHandle_t xSemaphoreProximityData = NULL; // Inicializar a NULL
 
 // Constantes
 #define PROXIMITY_SENSOR_TIMEOUT 250 // Timeout para la librería VL53L0X
-#define PROXIMITY_TASK_DELAY_MS 100   // Reducir delay para lecturas más frecuentes
+#define PROXIMITY_TASK_DELAY_MS 50   // Reducir delay para lecturas más frecuentes
 
 // --- Funciones Internas ---
 
@@ -45,8 +45,8 @@ bool initSingleSensor(VL53L0X &sensor, uint8_t xshutPin, uint8_t address, const 
     sensor.setAddress(address);
     sensor.setTimeout(PROXIMITY_SENSOR_TIMEOUT);
 
-    sensor.startContinuous(100);
-    sensor.setMeasurementTimingBudget(300000); // 30ms
+    sensor.startContinuous(300);
+    sensor.setMeasurementTimingBudget(250000); // 250 ms
     Serial.print(sensorName);
     Serial.print(" inicializado. Dirección: 0x");
     Serial.println(sensor.getAddress(), HEX);
@@ -178,6 +178,22 @@ void proximityTask(void *parameters)
     }
 }
 
+/**
+ * @brief Obtiene los datos de los sensores de proximidad de forma thread-safe.
+ * 
+ * Esta función intenta obtener los datos más recientes de los sensores de proximidad
+ * protegidos por un semáforo. Si no puede obtener el semáforo o éste no está
+ * inicializado, devolverá valores predeterminados (8191) y registrará un mensaje
+ * de error o advertencia.
+ * 
+ * @return ProximityData Estructura con los siguientes campos:
+ *   - frontDistance: Distancia medida por el sensor frontal (en unidades de medición del sensor)
+ *   - leftDistance: Distancia medida por el sensor izquierdo (en unidades de medición del sensor)
+ *   - rightDistance: Distancia medida por el sensor derecho (en unidades de medición del sensor)
+ * 
+ * @note Si no se puede adquirir el semáforo, la función tiene un timeout de 10ms
+ * @note El valor 8191 indica una lectura de distancia predeterminada o inválida
+ */
 ProximityData getProximityData()
 {
     ProximityData tempData;

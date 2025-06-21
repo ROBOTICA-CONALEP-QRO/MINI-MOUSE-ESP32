@@ -2,11 +2,11 @@
 #define MOTORES_H
 
 // MOTOR IZQUIERDA
-#define IN1 2
-#define IN2 3
+#define IN1 32
+#define IN2 35
 // MOTOR DERECHA
-#define IN3 4
-#define IN4 5
+#define IN3 14
+#define IN4 27
 
 void inicializarMotores();
 void moverAdelante();

@@ -141,12 +141,13 @@ void resetData()
     {
         if (xSemaphoreGiroscopio != NULL && xSemaphoreTake(xSemaphoreGiroscopio, portMAX_DELAY))
         {
-            angleX = 0;
-            angleY = 0;
-            angleZ = 0;
+            giroscopioData.angleX = 0;
+            giroscopioData.angleY = 0;
+            giroscopioData.angleZ = 0;
             xSemaphoreGive(xSemaphoreGiroscopio);
         }
     }
+    vTaskDelay(500 / portTICK_PERIOD_MS);
 }
 
 GiroscopioData getGiroscopioData()
